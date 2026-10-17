@@ -37,15 +37,13 @@ textarea{width:100%;min-height:72px;border:2px solid #d7e0e6;border-radius:14px;
 <body>
 <div class="app"><div class="card">
 <div class="tag">🎙️ 따라 말하기 · 발음 연습</div>
+
 <div id="authBox" style="background:#f4f8fa;border-radius:18px;padding:16px;margin-bottom:16px">
   <b>학생 로그인</b>
   <div style="display:grid;gap:8px;margin-top:10px">
-    <input id="loginEmail" type="email" placeholder="이메일" style="padding:12px;border:1px solid #d7e0e6;border-radius:12px;font-size:16px">
-    <input id="loginPassword" type="password" placeholder="비밀번호" style="padding:12px;border:1px solid #d7e0e6;border-radius:12px;font-size:16px">
-    <input id="studentName" type="text" placeholder="이름 (회원가입 시 입력)" style="padding:12px;border:1px solid #d7e0e6;border-radius:12px;font-size:16px">
-    <input id="studentId" type="text" placeholder="학번 (회원가입 시 입력)" style="padding:12px;border:1px solid #d7e0e6;border-radius:12px;font-size:16px">
-    <div style="display:flex;gap:8px">
-      <button class="primary" onclick="signUpStudent()">회원가입</button>
+    <input id="loginEmail" type="text" placeholder="아이디" autocomplete="username" style="padding:12px;border:1px solid #d7e0e6;border-radius:12px;font-size:16px">
+    <input id="loginPassword" type="password" placeholder="비밀번호" autocomplete="current-password" style="padding:12px;border:1px solid #d7e0e6;border-radius:12px;font-size:16px">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
       <button class="soft" onclick="signInStudent()">로그인</button>
       <button class="soft" onclick="signOutStudent()">로그아웃</button>
     </div>
