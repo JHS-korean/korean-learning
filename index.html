@@ -109,15 +109,41 @@ async function signUpStudent(){
   authMessage("회원가입이 완료되었습니다. 이메일 인증이 필요할 수 있습니다.");
 }
 
+
 async function signInStudent(){
-  if(!sb){authMessage("먼저 Supabase URL과 anon key를 입력해 주세요.");return;}
-  const email=document.getElementById("loginEmail").value.trim();
-  const password=document.getElementById("loginPassword").value;
-  const {data,error}=await sb.auth.signInWithPassword({email,password});
-  if(error){authMessage("로그인 오류: "+error.message);return;}
-  currentUser=data.user;
-  authMessage("로그인되었습니다: "+(currentUser.email||"학생"));
+  if(!sb){
+    authMessage("로그인 설정을 확인해 주세요.");
+    return;
+  }
+
+  const enteredId = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value;
+
+  if(!enteredId || !password){
+    authMessage("아이디와 비밀번호를 입력해 주세요.");
+    return;
+  }
+
+  // 이메일을 입력하면 기존 계정 방식으로 로그인합니다.
+  // 이메일이 아니면 학생 아이디를 가상 이메일로 변환합니다.
+  const email = enteredId.includes("@")
+    ? enteredId
+    : `${enteredId}@students.korean-learning.local`;
+
+  const {data, error} = await sb.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if(error){
+    authMessage("로그인 오류: 아이디 또는 비밀번호를 확인해 주세요.");
+    return;
+  }
+
+  currentUser = data.user;
+  authMessage("로그인되었습니다.");
 }
+
 
 async function signOutStudent(){
   if(sb) await sb.auth.signOut();
